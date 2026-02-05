@@ -1,0 +1,4 @@
+.skeleton { display:flex; flex-direction:column; gap:8px; }
+.skeleton-row { display:flex; gap:8px; }
+.skeleton-cell { background:linear-gradient(90deg,#f0f0f0,#e7e7e7,#f0f0f0); height:16px; flex:1; border-radius:4px; animation: shimmer 1.2s linear infinite; }
+@keyframes shimmer { 0% { background-position:-200px 0 } 100% { background-position:200px 0 } }

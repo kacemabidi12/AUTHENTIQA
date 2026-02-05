@@ -1,0 +1,12 @@
+.sed-drawer { position:fixed; right:0; top:0; bottom:0; width:420px; background:#fff; box-shadow:-4px 0 12px rgba(0,0,0,0.12); z-index:1200; display:flex; }
+.sed-content { padding:16px; width:100%; overflow:auto; position:relative; }
+.sed-close { position:absolute; right:8px; top:8px; background:transparent; border:none; font-size:22px; cursor:pointer; }
+.sed-body { padding-top:28px; }
+.sed-body .row { display:flex; gap:12px; flex-wrap:wrap; }
+.sed-body .row > div { min-width:120px; }
+.section { margin-top:12px; }
+.ocr-grid { display:flex; flex-direction:column; gap:6px; }
+.ocr-row { display:flex; gap:8px; }
+.ocr-key { width:140px; color:#666; }
+.ocr-val { flex:1; }
+.btn { background:#0b5cff; color:white; border:none; padding:6px 10px; border-radius:4px; cursor:pointer; }

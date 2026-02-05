@@ -1,0 +1,13 @@
+.universities-page { padding:16px; }
+.actions { margin-bottom:12px; }
+.table-wrap { border:1px solid #eee; border-radius:6px; overflow:auto; }
+.uni-table { width:100%; border-collapse:collapse; }
+.uni-table th, .uni-table td { padding:8px 10px; border-bottom:1px solid #f7f7f7; }
+.modal { position:fixed; left:0; top:0; right:0; bottom:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:1200; }
+.modal-content { background:white; padding:16px; border-radius:6px; width:480px; max-width:95%; max-height:90%; overflow:auto; position:relative; }
+.close { position:absolute; right:12px; top:8px; background:transparent; border:none; font-size:20px; cursor:pointer; }
+.btn { background:#0b5cff; color:white; border:none; padding:6px 10px; border-radius:4px; cursor:pointer; }
+.btn.outline { background:transparent; border:1px solid #0b5cff; color:#0b5cff; }
+.btn.small { padding:4px 6px; font-size:12px; }
+label { display:block; margin-top:8px; }
+label input, label select, label textarea { width:100%; padding:6px; margin-top:4px; }

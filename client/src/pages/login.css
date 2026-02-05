@@ -1,0 +1,10 @@
+/* simple login styles */
+.login-shell { display:flex; align-items:center; justify-content:center; height:100vh; background:#f4f6f8; }
+.login-box { background:#fff; padding:2rem; border-radius:8px; width:320px; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+.login-box h2 { margin:0 0 0.5rem 0; }
+.login-box p { margin:0 0 1rem 0; color:#666; font-size:0.9rem }
+.login-box label { display:block; margin-bottom:0.5rem; font-size:0.85rem }
+.login-box input { width:100%; padding:0.5rem; margin-top:0.25rem; margin-bottom:0.75rem; border:1px solid #e2e8f0; border-radius:4px }
+.btn { background:#2563eb; color:white; padding:0.6rem 1rem; border:none; border-radius:6px; cursor:pointer }
+.btn.small { padding:0.3rem 0.6rem; font-size:0.85rem }
+.error { background:#ffe4e6; color:#9b1c1c; padding:0.5rem; border-radius:4px; margin-bottom:0.5rem }
