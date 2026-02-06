@@ -1,0 +1,13 @@
+{
+  "name": "authentiqa",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start:server": "npm --prefix server start",
+    "start:server:dev": "npm --prefix server run dev",
+    "start:client": "npm --prefix client start",
+    "build:client": "npm --prefix client run build",
+    "seed": "npm --prefix server run seed",
+    "start": "echo \"Run 'npm run start:server' and 'npm run start:client' in separate terminals\" && exit 1"
+  }
+}

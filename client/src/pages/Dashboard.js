@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './dashboard.css';
 
 export default function Dashboard() {
   const [ping, setPing] = useState(null);

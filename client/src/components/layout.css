@@ -1,12 +1,194 @@
-/* Basic layout styles */
-.app-shell { display:flex; height:100vh; font-family:Arial,Helvetica,sans-serif }
-.sidebar { width:220px; background:#0f172a; color:#fff; padding:1rem; box-sizing:border-box }
-.brand { font-weight:bold; font-size:1.2rem; margin-bottom:1rem }
-.sidebar nav a { display:block; color:#cbd5e1; text-decoration:none; padding:0.4rem 0 }
-.sidebar nav a:hover { color:#fff }
-.main { flex:1; display:flex; flex-direction:column }
-.topbar { height:56px; display:flex; align-items:center; justify-content:space-between; padding:0 1rem; background:#fff; border-bottom:1px solid #e6eef8 }
-.topbar .user { margin-right:1rem }
-.content { padding:1rem; overflow:auto }
-.btn { background:#2563eb; color:white; padding:0.4rem 0.8rem; border:none; border-radius:6px; cursor:pointer }
-.btn.small { padding:0.2rem 0.5rem; font-size:0.85rem }
+/* Modern admin layout styles
+	 - Uses theme variables defined in ../styles/theme.css
+	 - Sidebar is fixed, topbar is sticky, content is centered and responsive
+*/
+
+.app-shell { display:block; min-height:100vh; font-family: Arial, Helvetica, sans-serif; }
+
+/* Sidebar: fixed width, dark surface, brand + nav */
+
+.sidebar {
+	width: 260px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	padding: 1.5rem 1.1rem;
+	box-sizing: border-box;
+	background: linear-gradient(180deg, rgba(12,20,40,0.98), rgba(10,18,32,0.95));
+	color: var(--text);
+	border-right: 1px solid var(--soft);
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+
+.brand {
+	font-weight: 800;
+	font-size: 1.25rem;
+	margin-bottom: 1.25rem;
+	color: var(--text);
+	letter-spacing: 0.6px;
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+.brand .logo {
+	width:36px; height:36px; border-radius:10px; background: var(--accent-gradient); box-shadow: 0 6px 18px rgba(37,99,235,0.14); display:inline-block
+}
+
+.sidebar nav { margin-top: 0.25rem }
+
+.sidebar nav { margin-top: 6px; }
+.sidebar nav a {
+	display:flex; align-items:center; gap:0.75rem;
+	color: var(--on-surface);
+	text-decoration: none;
+	padding: 0.6rem 0.65rem;
+	border-radius: 10px;
+	margin-bottom: 0.4rem;
+	transition: background 180ms ease, transform 140ms ease, color 140ms ease;
+}
+.sidebar nav a:hover { background: var(--soft); transform: translateX(4px); }
+.sidebar nav a.active { background: linear-gradient(90deg, var(--soft-strong), var(--soft)); color: var(--primary); box-shadow: inset 3px 0 0 var(--primary); }
+
+/* add simple icons via nth-child (emoji placeholders) */
+.sidebar nav a::before { content: ''; width:28px; height:28px; display:inline-flex; align-items:center; justify-content:center; border-radius:8px; background: var(--soft); font-size:14px }
+.sidebar nav a:nth-child(1)::before { content: '🏠' }
+.sidebar nav a:nth-child(2)::before { content: '📄' }
+.sidebar nav a:nth-child(3)::before { content: '📊' }
+.sidebar nav a:nth-child(4)::before { content: '🔍' }
+.sidebar nav a:nth-child(5)::before { content: '🏫' }
+.sidebar nav a:nth-child(6)::before { content: '🗂️' }
+
+/* Main column sits to the right of the fixed sidebar */
+
+.main {
+	margin-left: 260px;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background: linear-gradient(180deg,var(--bg), rgba(0,0,0,0.01));
+}
+
+/* Topbar: sticky with subtle border-bottom and content alignment */
+.topbar {
+	position: sticky;
+	top: 0;
+	z-index: 60;
+	height: 68px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 1.5rem;
+	background: linear-gradient(180deg, var(--surface), transparent);
+	border-bottom: 1px solid var(--soft);
+	backdrop-filter: blur(6px);
+}
+.topbar-left { font-size: 1.125rem; font-weight: 700; color: var(--text); display:flex; align-items:center; gap:0.75rem }
+.page-title { font-size: 1.125rem; font-weight:700 }
+.topbar-right { display: flex; align-items: center; gap: 0.5rem; }
+
+/* Theme toggle button (keeps .btn.small shape but lighter) */
+.theme-toggle {
+	background: transparent;
+	border: 1px solid var(--soft);
+	padding: 0.35rem 0.55rem;
+	font-size: 1.05rem;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: background 160ms ease, transform 120ms ease;
+}
+.theme-toggle:hover { background: var(--soft); transform: translateY(-1px) }
+
+/* Content area: centered, responsive, consistent padding */
+.content {
+	padding: 1.5rem;
+	max-width: 1200px;
+	margin: 1.75rem auto;
+	width: calc(100% - 48px);
+	box-sizing: border-box;
+}
+
+/* Card styles */
+.card {
+	background: linear-gradient(180deg,var(--card), transparent);
+	border: 1px solid var(--soft-strong);
+	border-radius: 14px;
+	padding: 1rem;
+	transition: box-shadow 180ms ease, transform 140ms ease, border-color 120ms ease;
+}
+
+[data-theme="light"] .card:hover {
+	box-shadow: 0 18px 40px rgba(2,6,23,0.08);
+	transform: translateY(-6px);
+	border-color: rgba(37,99,235,0.06);
+}
+
+/* Buttons */
+.btn { background: var(--accent-gradient); color: #fff; padding: 0.6rem 0.9rem; border: none; border-radius: 10px; cursor: pointer }
+.btn.small { padding: 0.35rem 0.6rem; font-size: 0.9rem; }
+.btn.outline { background: transparent; color: var(--primary); border: 1px solid var(--soft-strong); }
+
+/* Forms: consistent heights and focus ring */
+input, select, textarea {
+	height: 44px;
+	padding: 0 0.85rem;
+	border-radius: 12px;
+	border: 1px solid var(--soft-strong);
+	background: var(--input-bg);
+	color: var(--text);
+	box-sizing: border-box;
+	transition: box-shadow 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+textarea { height: auto; padding: 0.6rem 0.75rem; }
+input:focus, select:focus, textarea:focus {
+	outline: none;
+	border-color: var(--primary-variant);
+	box-shadow: 0 6px 20px rgba(37,99,235,0.12);
+	transform: translateY(-1px);
+}
+
+/* Tables: rounded container, sticky header, zebra rows, spacing */
+.table-container {
+	border-radius: 14px;
+	overflow: hidden;
+	border: 1px solid var(--soft);
+	background: linear-gradient(180deg,var(--card), transparent);
+}
+.table-container table { width: 100%; border-collapse: collapse; }
+.table-container thead th {
+	position: sticky;
+	top: 0;
+	background: var(--surface);
+	padding: 0.9rem 1rem;
+	text-align: left;
+	font-weight: 700;
+	border-bottom: 1px solid var(--soft-strong);
+}
+	.table-container tbody td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--soft); }
+
+	[data-theme="light"] .table-container tbody tr:nth-child(even) { background: rgba(2,6,23,0.02); }
+	[data-theme="dark"] .table-container tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+	.table-container tbody tr:hover { background: var(--soft); transform: translateY(-1px) }
+
+.muted { color: var(--muted); }
+
+/* Small muted text */
+.muted { color: var(--muted); }
+
+/* Utility: responsive tweaks */
+@media (max-width: 900px) {
+	.sidebar { width: 200px; }
+	.main { margin-left: 200px; }
+	.content { padding: 1rem; width: calc(100% - 32px); }
+}
+
+@media (max-width: 640px) {
+	.sidebar { position: static; width: 100%; height: auto; border-right: none; }
+	.main { margin-left: 0; }
+	.topbar { padding: 0.5rem 0.75rem; }
+	.content { margin: 0.75rem auto; padding: 0.75rem; }
+}

@@ -1,12 +1,254 @@
-.sed-drawer { position:fixed; right:0; top:0; bottom:0; width:420px; background:#fff; box-shadow:-4px 0 12px rgba(0,0,0,0.12); z-index:1200; display:flex; }
-.sed-content { padding:16px; width:100%; overflow:auto; position:relative; }
-.sed-close { position:absolute; right:8px; top:8px; background:transparent; border:none; font-size:22px; cursor:pointer; }
-.sed-body { padding-top:28px; }
-.sed-body .row { display:flex; gap:12px; flex-wrap:wrap; }
-.sed-body .row > div { min-width:120px; }
-.section { margin-top:12px; }
-.ocr-grid { display:flex; flex-direction:column; gap:6px; }
-.ocr-row { display:flex; gap:8px; }
-.ocr-key { width:140px; color:#666; }
-.ocr-val { flex:1; }
-.btn { background:#0b5cff; color:white; border:none; padding:6px 10px; border-radius:4px; cursor:pointer; }
+/* Scan Event Details drawer
+   - Uses theme variables when available (../styles/theme.css)
+   - Keeps existing class names and structure intact
+*/
+
+.sed-drawer{
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 420px;
+  z-index: 1200;
+  display: flex;
+
+  /* Surface */
+  background: var(--surface, #ffffff);
+  color: var(--text, #0f172a);
+
+  /* Depth */
+  box-shadow: -18px 0 60px rgba(2, 6, 23, 0.18), -4px 0 14px rgba(2, 6, 23, 0.10);
+  border-left: 1px solid var(--soft, rgba(2, 6, 23, 0.08));
+}
+
+/* Dark mode support if your app uses data-theme */
+[data-theme="dark"] .sed-drawer{
+  background: linear-gradient(180deg, rgba(12, 20, 40, 0.98), rgba(10, 18, 32, 0.96));
+  border-left: 1px solid rgba(255,255,255,0.08);
+  box-shadow: -18px 0 60px rgba(0, 0, 0, 0.55), -4px 0 16px rgba(0, 0, 0, 0.35);
+}
+
+.sed-content{
+  padding: 18px 18px 16px;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+}
+
+/* Close button: modern pill */
+.sed-close{
+  position: absolute;
+  right: 12px;
+  top: 12px;
+
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+
+  background: var(--soft, rgba(2, 6, 23, 0.06));
+  color: var(--text, #0f172a);
+
+  border: 1px solid var(--soft, rgba(2, 6, 23, 0.08));
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 140ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.sed-close:hover{
+  transform: translateY(-1px);
+  background: var(--soft-strong, rgba(2, 6, 23, 0.10));
+  box-shadow: 0 10px 26px rgba(2, 6, 23, 0.12);
+}
+
+[data-theme="dark"] .sed-close{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.92);
+}
+
+.sed-body{
+  padding-top: 40px;
+}
+
+/* Title */
+.sed-body h3{
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+/* Summary grid: looks like cards */
+.sed-body .row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+@media (max-width: 520px){
+  .sed-drawer{ width: 100%; }
+  .sed-body .row{ grid-template-columns: 1fr; }
+}
+
+/* Each stat block */
+.sed-body .row > div{
+  min-width: 0;
+  padding: 12px 12px;
+  border-radius: 14px;
+
+  background: linear-gradient(180deg, var(--card, rgba(2,6,23,0.03)), transparent);
+  border: 1px solid var(--soft, rgba(2, 6, 23, 0.08));
+
+  transition: transform 140ms ease, box-shadow 180ms ease, border-color 160ms ease;
+}
+
+.sed-body .row > div:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 38px rgba(2,6,23,0.10);
+  border-color: rgba(37, 99, 235, 0.18);
+}
+
+[data-theme="dark"] .sed-body .row > div{
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.sed-body .row strong{
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+  color: var(--muted, rgba(15, 23, 42, 0.65));
+  margin-bottom: 6px;
+}
+
+[data-theme="dark"] .sed-body .row strong{
+  color: rgba(255,255,255,0.70);
+}
+
+.sed-body .row > div > div{
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text, #0f172a);
+  word-break: break-word;
+}
+
+[data-theme="dark"] .sed-body .row > div > div{
+  color: rgba(255,255,255,0.92);
+}
+
+/* Sections */
+.section{
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--soft, rgba(2, 6, 23, 0.08));
+}
+
+[data-theme="dark"] .section{
+  border-top: 1px solid rgba(255,255,255,0.10);
+}
+
+.section h4{
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+/* Reasons list: nicer bullets */
+.section ul{
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.section li{
+  color: var(--text, #0f172a);
+  opacity: 0.92;
+}
+
+[data-theme="dark"] .section li{
+  color: rgba(255,255,255,0.90);
+}
+
+/* OCR grid */
+.ocr-grid{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ocr-row{
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 10px;
+
+  padding: 10px 10px;
+  border-radius: 12px;
+
+  background: var(--soft, rgba(2, 6, 23, 0.04));
+  border: 1px solid var(--soft, rgba(2, 6, 23, 0.08));
+}
+
+[data-theme="dark"] .ocr-row{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+@media (max-width: 520px){
+  .ocr-row{ grid-template-columns: 1fr; }
+}
+
+.ocr-key{
+  width: auto; /* keep original class, just allow grid to control */
+  color: var(--muted, rgba(15, 23, 42, 0.65));
+  font-weight: 700;
+  font-size: 0.9rem;
+  word-break: break-word;
+}
+
+[data-theme="dark"] .ocr-key{
+  color: rgba(255,255,255,0.70);
+}
+
+.ocr-val{
+  flex: 1;
+  color: var(--text, #0f172a);
+  font-weight: 600;
+  word-break: break-word;
+}
+
+[data-theme="dark"] .ocr-val{
+  color: rgba(255,255,255,0.92);
+}
+
+/* Button inside drawer: keep .btn class but make it match your global theme */
+.sed-body .btn{
+  border-radius: 12px;
+  padding: 0.7rem 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.16);
+  transition: transform 140ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+.sed-body .btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.22);
+  filter: brightness(1.02);
+}
+
+.sed-body .btn:disabled{
+  opacity: 0.65;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
